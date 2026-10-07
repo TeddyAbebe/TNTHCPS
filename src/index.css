@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-ivory font-sans text-charcoal antialiased;
+  }
+
+  ::selection {
+    background: #1b4d3e;
+    color: #f7f1e6;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-moss;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-12;
+  }
+
+  .kicker {
+    @apply font-sans text-[11px] font-medium uppercase tracking-[0.28em] text-brick;
+  }
+
+  .display {
+    @apply font-display text-[2.65rem] font-medium leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl md:text-[4.15rem];
+  }
+
+  .lede {
+    @apply max-w-reading text-pretty text-lg font-normal leading-relaxed text-mute md:text-[1.35rem] md:leading-relaxed;
+  }
+
+  .nav-link {
+    @apply font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-ink/75 transition-colors hover:text-ink;
+  }
+
+  .nav-on-dark {
+    @apply font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-ivory/80 hover:text-ivory;
+    background-image: linear-gradient(#c6a15a, #c6a15a);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: color 0.2s ease, background-size 0.35s ease;
+  }
+
+  .nav-on-dark:hover {
+    background-size: 100% 1px;
+  }
+
+  .nav-link-active {
+    @apply text-ink;
+  }
+
+  .prose-quiet p {
+    @apply mb-6 text-[1.075rem] leading-[1.8] text-ink/90;
+  }
+
+  .prose-quiet h2 {
+    @apply mb-3 mt-12 font-display text-3xl font-medium tracking-tight text-ink;
+  }
+
+  .index-row {
+    @apply grid grid-cols-1 items-baseline gap-3 border-t border-line py-7 transition-colors hover:bg-ink/[0.025] md:grid-cols-12 md:gap-6 md:px-2;
+  }
+
+  .text-link {
+    @apply inline-flex items-center gap-2 border-b border-ink/30 pb-0.5 font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-ink transition hover:border-ink;
+  }
+
+  .horn {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation: draw-horn 1.05s ease forwards;
+  }
+
+  .horn-late {
+    animation-delay: 0.28s;
+  }
+
+  .gold-in {
+    animation: gold-in 0.7s 0.85s ease both;
+  }
+
+  .lid-in {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: lid-in 0.55s 0.7s ease both;
+  }
+
+  .opening-leave {
+    animation: opening-out 0.55s ease forwards;
+  }
+}
+
+@keyframes draw-horn {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes lid-in {
+  from {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gold-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes opening-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
