@@ -1,5 +1,5 @@
 import { IndexList } from "../components/IndexList.tsx";
-import { projects } from "../data/content.ts";
+import { programmesFor, projects } from "../data/content.ts";
 import { usePageTitle } from "../usePageTitle.ts";
 
 export function Projects() {
@@ -23,6 +23,7 @@ export function Projects() {
             index: String(index + 1).padStart(2, "0"),
             title: item.title,
             summary: item.summary,
+            meta: programmesFor(item).map((programme) => programme.title).join(" · "),
           }))}
         />
       </div>

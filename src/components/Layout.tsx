@@ -5,11 +5,18 @@ import { SiteFooter } from "./SiteFooter.tsx";
 import { SiteHeader } from "./SiteHeader.tsx";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) {
+      const node = document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (node) {
+        node.scrollIntoView();
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }

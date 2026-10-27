@@ -3,7 +3,7 @@ import { Figure } from "../components/Figure.tsx";
 import { IndexList } from "../components/IndexList.tsx";
 import { ProductVisual } from "../components/ProductVisual.tsx";
 import { Reveal } from "../components/Reveal.tsx";
-import { breedFacts, pictures, products, programmes, projects, six, three } from "../data/content.ts";
+import { breedFacts, pictures, products, programmes, projects, projectsFor, six, three } from "../data/content.ts";
 import { usePageTitle } from "../usePageTitle.ts";
 
 export function Home() {
@@ -154,6 +154,7 @@ export function Home() {
               index: String(index + 1).padStart(2, "0"),
               title: item.title,
               summary: item.summary,
+              meta: projectsFor(item).map((project) => project.title).join(" · "),
             }))}
           />
           <p className="mt-8 max-w-reading text-mute">
@@ -173,9 +174,14 @@ export function Home() {
               {projects[0].title}
             </h2>
             <p className="mt-5 leading-relaxed text-mute">{projects[0].summary}</p>
-            <Link to="/projects" className="text-link mt-8">
-              All project lines
-            </Link>
+            <div className="mt-8 flex flex-col items-start gap-4">
+              <Link to="/programmes/conservation" className="text-link">
+                Conservation
+              </Link>
+              <Link to="/projects" className="text-link">
+                All project lines
+              </Link>
+            </div>
           </div>
         </div>
       </section>

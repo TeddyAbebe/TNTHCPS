@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { programmes } from "../data/content.ts";
+import { programmes, six } from "../data/content.ts";
 import { Mark } from "./Mark.tsx";
 
 const aboutLinks = [
   { to: "/about", label: "Intro" },
-  { to: "/about/groups", label: "Nine groups" },
-  { to: "/about/todas", label: "Todas of the Nilgiris" },
+  ...six.map((group) => ({
+    to: group.slug === "toda" ? "/about/todas" : `/about/groups#${group.slug}`,
+    label: group.name,
+  })),
 ];
 
 function itemActive(path: string, to: string) {
@@ -56,7 +58,7 @@ export function SiteHeader() {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`block px-5 py-2.5 font-display text-lg leading-none hover:bg-ink/[0.03] ${itemActive(location.pathname, link.to) ? "italic" : ""}`}
+                    className={`block px-5 py-2.5 font-display text-lg leading-none hover:bg-ink/[0.03] ${itemActive(`${location.pathname}${location.hash}`, link.to) ? "italic" : ""}`}
                   >
                     {link.label}
                   </Link>

@@ -21,6 +21,8 @@ export type Entry = {
   picture: Picture;
   paragraphs: string[];
   points?: string[];
+  programme?: string;
+  also?: string[];
 };
 
 const wiki = (file: string, alt: string, caption: string, credit: string): Picture => ({
@@ -237,6 +239,8 @@ export const projects: Entry[] = [
     title: "The high grassland",
     summary: "With Toda pastoral landscapes — the mund, the buffalo, and the grass that holds both.",
     lede: "A project on the plateau, concerned with the grassland itself and the pastoral life that reads it.",
+    programme: "conservation",
+    also: ["rights"],
     picture: pictures.grass,
     paragraphs: [
       "The upper Nilgiris are a grassland punctuated by shola. Toda pastoral life belongs to that pattern. When the grass is planted over, or fenced, the relationship thins with it.",
@@ -249,6 +253,8 @@ export const projects: Entry[] = [
     title: "Honey on the slope",
     summary: "With Kurumba collectors, a slower path for wild honey from cliff to household.",
     lede: "Wild honey is a forest relationship before it is a jar. The project tries to keep that order.",
+    programme: "livelihood",
+    also: ["conservation"],
     picture: pictures.honey,
     paragraphs: [
       "Collecting honey from the giant rock bee is dangerous, skilled, and timed to a season. The people who do it already know the cliff. What they are often denied is a price, a story, and a say that match the risk.",
@@ -261,6 +267,8 @@ export const projects: Entry[] = [
     title: "Counted thread",
     summary: "Embroidery that keeps the geometry, the makers, and the return in the same place.",
     lede: "Toda embroidery is counted, not drawn. The project’s task is to leave it that way.",
+    programme: "livelihood",
+    also: ["education"],
     picture: pictures.cloth,
     paragraphs: [
       "The stitch is worked by counting threads, in red and black, and the pattern can be read from either side of the cloth. It is a Toda women’s practice. The ceremonial shawl is the putukuli. The embroidery was registered as a geographical indication in 2013, so the name belongs to work done by hand in the Nilgiris.",
@@ -269,6 +277,19 @@ export const projects: Entry[] = [
     ],
   },
 ];
+
+export function programmesFor(project: Entry) {
+  const slugs = [project.programme, ...(project.also ?? [])].filter((slug): slug is string => Boolean(slug));
+  return slugs
+    .map((slug) => programmes.find((item) => item.slug === slug))
+    .filter((item): item is Entry => Boolean(item));
+}
+
+export function projectsFor(programme: Entry) {
+  return projects.filter(
+    (item) => item.programme === programme.slug || item.also?.includes(programme.slug),
+  );
+}
 
 export const palette = [
   { name: "Olive gold", hex: "#C6A15A" },

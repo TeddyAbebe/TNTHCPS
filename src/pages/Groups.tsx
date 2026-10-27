@@ -4,7 +4,7 @@ import { usePageTitle } from "../usePageTitle.ts";
 
 function GroupBlock({ group, extra }: { group: Community; extra?: boolean }) {
   return (
-    <article id={group.slug} className="border-t border-line py-10 md:grid md:grid-cols-12 md:gap-8">
+    <article id={group.slug} className="scroll-mt-28 border-t border-line py-10 md:grid md:grid-cols-12 md:gap-8">
       <div className="md:col-span-4">
         <h3 className="font-display text-4xl font-medium">{group.name}</h3>
         <p className="kicker mt-3">{group.place}</p>
